@@ -1,0 +1,14 @@
+{
+  "name": "jestdemo-chat-server",
+  "version": "1.0.0",
+  "description": "WebSocket chat server for jestDemo app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "ws": "^8.18.0"
+  }
+}
