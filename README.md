@@ -95,3 +95,61 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+# CI/CD Setup
+
+This project is configured with Jenkins for CI/CD and SonarQube for code quality analysis.
+
+## Setting up and Starting Jenkins (macOS/Homebrew)
+
+1. **Install Jenkins LTS:**
+   ```sh
+   brew install jenkins-lts
+   ```
+
+2. **Start the Jenkins server:**
+   ```sh
+   brew services start jenkins-lts
+   ```
+
+3. **Access Jenkins:**
+   Open your browser and navigate to `http://localhost:8080`.
+
+4. **Get the initial admin password:**
+   ```sh
+   cat ~/.jenkins/secrets/initialAdminPassword
+   ```
+
+## Setting up and Starting SonarQube (Docker)
+
+The easiest way to run SonarQube locally is using Docker.
+
+1. **Start the SonarQube container:**
+   ```sh
+   docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest
+   ```
+
+2. **Access SonarQube:**
+   Open your browser and navigate to `http://localhost:9000`.
+   *(Default login is usually `admin` / `admin`)*
+
+3. **Link to Jenkins:**
+   Ensure you configure the `SonarQubeServer` in your Jenkins Global Configuration to point to this URL.
+
+## Setting up and Starting SonarQube (Without Docker / Homebrew)
+
+If you prefer not to use Docker, you can install SonarQube directly on macOS using Homebrew.
+
+1. **Install SonarQube:**
+   ```sh
+   brew install sonarqube
+   ```
+
+2. **Start the SonarQube server:**
+   ```sh
+   brew services start sonarqube
+   ```
+
+3. **Access SonarQube:**
+   Open your browser and navigate to `http://localhost:9000`.
+   *(Default login is usually `admin` / `admin`)*
