@@ -83,7 +83,7 @@ pipeline {
                                -scheme jestDemo \
                                -configuration Release \
                                -sdk iphonesimulator \
-                               -destination 'generic/platform=iOS Simulator' \
+                               -destination 'platform=iOS Simulator,name=iPhone 15' \
                                CODE_SIGN_IDENTITY="" \
                                CODE_SIGNING_REQUIRED=NO \
                                CODE_SIGNING_ALLOWED=NO \
