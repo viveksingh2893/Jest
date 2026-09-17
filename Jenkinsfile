@@ -11,6 +11,9 @@ pipeline {
         ANDROID_HOME = "/Users/apple/Library/Android/sdk"
         // Ensure Jenkins shell can find global commands like 'pod' (CocoaPods) installed via Homebrew or RubyGems
         PATH = "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:${env.PATH}"
+        // Fix for CocoaPods "Unicode Normalization not appropriate for ASCII-8BIT" error
+        LANG = "en_US.UTF-8"
+        LC_ALL = "en_US.UTF-8"
     }
 
     stages {
