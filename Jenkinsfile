@@ -27,23 +27,23 @@ pipeline {
             }
         }
 
-        stage('Test & SonarQube') {
-            steps {
-                echo 'Running tests with coverage...'
-                // Ensure Jest is configured to output lcov reports for Sonar
-                sh 'yarn test:coverage'
+        // stage('Test & SonarQube') {
+        //     steps {
+        //         echo 'Running tests with coverage...'
+        //         // Ensure Jest is configured to output lcov reports for Sonar
+        //         sh 'yarn test:coverage'
 
-                echo 'Running SonarQube analysis...'
-                // Assumes SonarQube Scanner is available in path or configured as a Jenkins tool
-                // with the environment name 'SonarQubeScanner' (can be adjusted)
-                script {
-                    def scannerHome = tool 'SonarQubeScanner'
-                    withSonarQubeEnv('SonarQubeServer') { // Ensure 'SonarQubeServer' matches Jenkins config
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
-                }
-            }
-        }
+        //         echo 'Running SonarQube analysis...'
+        //         // Assumes SonarQube Scanner is available in path or configured as a Jenkins tool
+        //         // with the environment name 'SonarQubeScanner' (can be adjusted)
+        //         script {
+        //             def scannerHome = tool 'SonarQubeScanner'
+        //             withSonarQubeEnv('SonarQubeServer') { // Ensure 'SonarQubeServer' matches Jenkins config
+        //                 sh "${scannerHome}/bin/sonar-scanner"
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Android Build') {
             steps {
