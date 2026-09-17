@@ -1,10 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'node-20' // This matches the name you set in Jenkins Global Tool Configuration
+    }
+
     environment {
-        // You may need to specify explicit tool paths if your Jenkins environment requires them
-        // e.g. NODE_HOME = tool 'node-20'
-        // e.g. JAVA_HOME = tool 'jdk-17'
         YARN_CACHE_FOLDER = "${env.WORKSPACE}/.yarn-cache"
     }
 
