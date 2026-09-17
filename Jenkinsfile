@@ -82,8 +82,11 @@ pipeline {
                     xcodebuild -workspace jestDemo.xcworkspace \
                                -scheme jestDemo \
                                -configuration Release \
-                               -sdk iphoneos \
-                               -allowProvisioningUpdates \
+                               -sdk iphonesimulator \
+                               -destination 'generic/platform=iOS Simulator' \
+                               CODE_SIGN_IDENTITY="" \
+                               CODE_SIGNING_REQUIRED=NO \
+                               CODE_SIGNING_ALLOWED=NO \
                                build
                     '''
                 }
