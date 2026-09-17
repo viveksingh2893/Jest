@@ -9,6 +9,8 @@ pipeline {
         YARN_CACHE_FOLDER = "${env.WORKSPACE}/.yarn-cache"
         // Adjust this if your Jenkins server is on Linux or a different user
         ANDROID_HOME = "/Users/apple/Library/Android/sdk"
+        // Ensure Jenkins shell can find global commands like 'pod' (CocoaPods) installed via Homebrew or RubyGems
+        PATH = "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:${env.PATH}"
     }
 
     stages {
