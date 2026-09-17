@@ -84,6 +84,9 @@ pipeline {
                                -configuration Release \
                                -sdk iphonesimulator \
                                -destination 'platform=iOS Simulator,id=FFF7A3B6-591F-412E-BA87-0393E4FCD4A0' \
+                               ARCHS=arm64 \
+                               ONLY_ACTIVE_ARCH=NO \
+                               EXCLUDED_ARCHS=x86_64 \
                                CODE_SIGN_IDENTITY="" \
                                CODE_SIGNING_REQUIRED=NO \
                                CODE_SIGNING_ALLOWED=NO \
