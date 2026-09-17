@@ -76,12 +76,13 @@ pipeline {
             steps {
                 echo 'Building iOS App...'
                 dir('ios') {
+                    sh 'pod deintegrate || true'
                     sh 'pod install'
                     // Basic xcodebuild command (adjust scheme and workspace as necessary)
                     sh '''
                     xcodebuild -workspace jestDemo.xcworkspace \
                                -scheme jestDemo \
-                               -configuration Release \
+                               -configuration Debug \
                                -sdk iphonesimulator \
                                -destination 'platform=iOS Simulator,id=FFF7A3B6-591F-412E-BA87-0393E4FCD4A0' \
                                ARCHS=arm64 \
