@@ -23,14 +23,24 @@ export function HomeScreen() {
       />
       <Button text="DONE" onPress={() => console.log('testing')} />
 
-      {/* Chat entry button */}
-      <TouchableOpacity
-        style={styles.chatButton}
-        onPress={() => navigation.navigate('Chat')}
-        activeOpacity={0.8}>
-        <Text style={styles.chatButtonEmoji}>💬</Text>
-        <Text style={styles.chatButtonText}>Open Chat</Text>
-      </TouchableOpacity>
+      {/* Action buttons row */}
+      <View style={styles.buttonRow}>
+        <TouchableOpacity
+          style={styles.chatButton}
+          onPress={() => navigation.navigate('Chat')}
+          activeOpacity={0.8}>
+          <Text style={styles.chatButtonEmoji}>💬</Text>
+          <Text style={styles.chatButtonText}>Chat</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.aiButton}
+          onPress={() => navigation.navigate('AI')}
+          activeOpacity={0.8}>
+          <Text style={styles.chatButtonEmoji}>✨</Text>
+          <Text style={styles.chatButtonText}>AI Studio</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -39,22 +49,37 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  chatButton: {
+  buttonRow: {
     position: 'absolute',
     bottom: 40,
     right: 20,
+    flexDirection: 'row',
+    gap: 12,
+  },
+  chatButton: {
     backgroundColor: '#0A84FF',
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 14,
     borderRadius: 28,
-    // Shadow for iOS
     shadowColor: '#0A84FF',
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.35,
     shadowRadius: 8,
-    // Shadow for Android
+    elevation: 8,
+  },
+  aiButton: {
+    backgroundColor: '#6B21D6',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+    borderRadius: 28,
+    shadowColor: '#BF5AF2',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.35,
+    shadowRadius: 8,
     elevation: 8,
   },
   chatButtonEmoji: {

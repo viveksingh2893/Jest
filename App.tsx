@@ -4,10 +4,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {HomeScreen} from './screens/HomeScreen';
 import {ChatScreen} from './component/chat/ChatScreen';
+import {AIScreen} from './screens/AIScreen';
 
 export type RootStackParamList = {
   Home: undefined;
   Chat: undefined;
+  AI: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -25,6 +27,13 @@ function App() {
           <Stack.Screen
             name="Chat"
             component={ChatScreen}
+            options={{
+              animation: 'slide_from_right',
+            }}
+          />
+          <Stack.Screen
+            name="AI"
+            component={AIScreen}
             options={{
               animation: 'slide_from_right',
             }}

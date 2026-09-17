@@ -1,0 +1,164 @@
+diff --git a/node_modules/react-native-screens/src/components/split/SplitHost.tsx b/node_modules/react-native-screens/src/components/split/SplitHost.tsx
+index 74862bf..07252b0 100644
+--- a/node_modules/react-native-screens/src/components/split/SplitHost.tsx
++++ b/node_modules/react-native-screens/src/components/split/SplitHost.tsx
+@@ -10,7 +10,7 @@ import type {
+ } from './SplitHost.types';
+ import SplitScreen from './SplitScreen';
+ 
+-type NativeRef = React.ComponentRef<typeof SplitHostNativeComponent>;
++type NativeRef = React.ElementRef<typeof SplitHostNativeComponent>;
+ 
+ // According to the UIKit documentation: https://developer.apple.com/documentation/uikit/uisplitviewcontroller/displaymode-swift.enum
+ // Only specific pairs for displayMode - splitBehavior are valid and others may lead to unexpected results.
+diff --git a/node_modules/react-native-screens/src/fabric/legacy/SearchBarNativeComponent.ts b/node_modules/react-native-screens/src/fabric/legacy/SearchBarNativeComponent.ts
+index f73aa6f..1ea5959 100644
+--- a/node_modules/react-native-screens/src/fabric/legacy/SearchBarNativeComponent.ts
++++ b/node_modules/react-native-screens/src/fabric/legacy/SearchBarNativeComponent.ts
+@@ -76,15 +76,15 @@ export interface NativeProps extends ViewProps {
+ type ComponentType = HostComponent<NativeProps>;
+ 
+ interface NativeCommands {
+-  blur: (instance: React.ComponentRef<ComponentType>) => void;
+-  focus: (instance: React.ComponentRef<ComponentType>) => void;
+-  clearText: (instance: React.ComponentRef<ComponentType>) => void;
++  blur: (instance: React.ElementRef<ComponentType>) => void;
++  focus: (instance: React.ElementRef<ComponentType>) => void;
++  clearText: (instance: React.ElementRef<ComponentType>) => void;
+   toggleCancelButton: (
+-    instance: React.ComponentRef<ComponentType>,
++    instance: React.ElementRef<ComponentType>,
+     flag: boolean,
+   ) => void;
+-  setText: (instance: React.ComponentRef<ComponentType>, text: string) => void;
+-  cancelSearch: (instance: React.ComponentRef<ComponentType>) => void;
++  setText: (instance: React.ElementRef<ComponentType>, text: string) => void;
++  cancelSearch: (instance: React.ElementRef<ComponentType>) => void;
+ }
+ 
+ export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
+diff --git a/node_modules/react-native-screens/src/fabric/split/SplitHostNativeComponent.ts b/node_modules/react-native-screens/src/fabric/split/SplitHostNativeComponent.ts
+index b3dfa2d..c206c10 100644
+--- a/node_modules/react-native-screens/src/fabric/split/SplitHostNativeComponent.ts
++++ b/node_modules/react-native-screens/src/fabric/split/SplitHostNativeComponent.ts
+@@ -112,7 +112,7 @@ type ComponentType = HostComponent<NativeProps>;
+ 
+ interface NativeCommands {
+   showColumn: (
+-    viewRef: React.ComponentRef<ComponentType>,
++    viewRef: React.ElementRef<ComponentType>,
+     column: string,
+   ) => void;
+ }
+diff --git a/node_modules/react-native-screens/src/fabric/stack/StackHeaderConfigAndroidNativeComponent.ts b/node_modules/react-native-screens/src/fabric/stack/StackHeaderConfigAndroidNativeComponent.ts
+index c54bfcc..109bff2 100644
+--- a/node_modules/react-native-screens/src/fabric/stack/StackHeaderConfigAndroidNativeComponent.ts
++++ b/node_modules/react-native-screens/src/fabric/stack/StackHeaderConfigAndroidNativeComponent.ts
+@@ -129,7 +129,7 @@ type StackHeaderToolbarMenuElementUpdateNativeAndroid =
+ 
+ export interface NativeCommands {
+   updateToolbarMenuElements: (
+-    viewRef: React.ComponentRef<ComponentType>,
++    viewRef: React.ElementRef<ComponentType>,
+     updates: StackHeaderToolbarMenuElementUpdateNativeAndroid[],
+   ) => void;
+ }
+diff --git a/node_modules/react-native-screens/src/fabric/stack/StackHeaderConfigIOSNativeComponent.ts b/node_modules/react-native-screens/src/fabric/stack/StackHeaderConfigIOSNativeComponent.ts
+index 944adc1..0293414 100644
+--- a/node_modules/react-native-screens/src/fabric/stack/StackHeaderConfigIOSNativeComponent.ts
++++ b/node_modules/react-native-screens/src/fabric/stack/StackHeaderConfigIOSNativeComponent.ts
+@@ -53,13 +53,13 @@ export interface NativeMenuElementOptionsIOS {
+ 
+ export interface NativeCommands {
+   setMenuItemOptions: (
+-    viewRef: React.ComponentRef<ComponentType>,
++    viewRef: React.ElementRef<ComponentType>,
+     menuElementId: string,
+     // Array wrapper due to codegen limitation — only the first element is used.
+     options: NativeMenuElementOptionsIOS[],
+   ) => void;
+   setMenuOptions: (
+-    viewRef: React.ComponentRef<ComponentType>,
++    viewRef: React.ElementRef<ComponentType>,
+     menuElementId: string,
+     // Array wrapper due to codegen limitation — only the first element is used.
+     options: NativeMenuElementOptionsIOS[],
+diff --git a/node_modules/react-native-screens/src/legacy/components/Screen.tsx b/node_modules/react-native-screens/src/legacy/components/Screen.tsx
+index abaecd1..ae5ce0b 100644
+--- a/node_modules/react-native-screens/src/legacy/components/Screen.tsx
++++ b/node_modules/react-native-screens/src/legacy/components/Screen.tsx
+@@ -41,7 +41,7 @@ const AnimatedNativeModalScreen = Animated.createAnimatedComponent(
+ 
+ // Incomplete type, all accessible properties available at:
+ // react-native/Libraries/Components/View/ReactNativeViewViewConfig.js
+-interface ViewConfig extends React.ComponentRef<typeof View> {
++interface ViewConfig extends React.ElementRef<typeof View> {
+   viewConfig: {
+     validAttributes: {
+       style: {
+@@ -65,10 +65,10 @@ interface ViewConfig extends React.ComponentRef<typeof View> {
+   };
+ }
+ 
+-// Nominal instance type for screen refs. `React.ComponentRef<typeof View>`
++// Nominal instance type for screen refs. `React.ElementRef<typeof View>`
+ // declaration emit resolves down to the non-public `ReactNativeElement` class.
+ // An interface stops that resolution at a name this package can emit.
+-export interface ScreenInstance extends React.ComponentRef<typeof View> {}
++export interface ScreenInstance extends React.ElementRef<typeof View> {}
+ 
+ export const InnerScreen = React.forwardRef<ScreenInstance, ScreenProps>(
+   function InnerScreen(props, ref) {
+diff --git a/node_modules/react-native-screens/src/legacy/components/ScreenStackHeaderConfig.tsx b/node_modules/react-native-screens/src/legacy/components/ScreenStackHeaderConfig.tsx
+index 912ee16..9f05c75 100644
+--- a/node_modules/react-native-screens/src/legacy/components/ScreenStackHeaderConfig.tsx
++++ b/node_modules/react-native-screens/src/legacy/components/ScreenStackHeaderConfig.tsx
+@@ -30,11 +30,11 @@ import { useEdgeInsetApplication } from './contexts/EdgeInsetApplicationContext'
+ export const ScreenStackHeaderSubview: React.ComponentType<ScreenStackHeaderSubviewNativeProps> =
+   ScreenStackHeaderSubviewNativeComponent;
+ 
+-// Nominal instance type for header config refs. `React.ComponentRef<typeof View>`
++// Nominal instance type for header config refs. `React.ElementRef<typeof View>`
+ // declaration emit resolves down to the non-public `ReactNativeElement` class.
+ // An interface stops that resolution at a name this package can emit.
+ export interface ScreenStackHeaderConfigInstance
+-  extends React.ComponentRef<typeof View> {}
++  extends React.ElementRef<typeof View> {}
+ 
+ export const ScreenStackHeaderConfig = React.forwardRef<
+   ScreenStackHeaderConfigInstance,
+diff --git a/node_modules/react-native-screens/src/legacy/components/SearchBar.tsx b/node_modules/react-native-screens/src/legacy/components/SearchBar.tsx
+index 4920e77..f789238 100644
+--- a/node_modules/react-native-screens/src/legacy/components/SearchBar.tsx
++++ b/node_modules/react-native-screens/src/legacy/components/SearchBar.tsx
+@@ -17,7 +17,7 @@ import SearchBarNativeComponent, {
+ } from '../../fabric/legacy/SearchBarNativeComponent';
+ import type { CodegenTypes as CT } from 'react-native';
+ 
+-type SearchBarHostInstance = React.ComponentRef<
++type SearchBarHostInstance = React.ElementRef<
+   typeof SearchBarNativeComponent
+ >;
+ 
+diff --git a/node_modules/react-native-screens/src/legacy/types.ts b/node_modules/react-native-screens/src/legacy/types.ts
+index 5fc3b4e..df2f62f 100644
+--- a/node_modules/react-native-screens/src/legacy/types.ts
++++ b/node_modules/react-native-screens/src/legacy/types.ts
+@@ -342,7 +342,7 @@ export interface ScreenProps extends ViewProps {
+    * @platform ios
+    */
+   preventNativeDismiss?: boolean | undefined;
+-  ref?: React.Ref<React.ComponentRef<typeof View>> | undefined;
++  ref?: React.Ref<React.ElementRef<typeof View>> | undefined;
+   /**
+    * How should the screen replacing another screen animate. Defaults to `pop`.
+    * The following values are currently supported:
+@@ -1370,7 +1370,7 @@ export type AnimatedScreenTransition = {
+ 
+ export type ScreensRefsHolder = Record<
+   string,
+-  React.RefObject<React.ComponentRef<typeof View>>
++  React.RefObject<React.ElementRef<typeof View>>
+ >;
+ 
+ export interface GestureProps {
