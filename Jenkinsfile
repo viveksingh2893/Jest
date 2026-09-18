@@ -75,6 +75,11 @@ pipeline {
             }
             steps {
                 echo 'Building iOS App...'
+                
+                // Prevent "unable to initiate PIF transfer session" locks
+                sh 'pkill -f xcodebuild || true'
+                sh 'rm -rf ~/Library/Developer/Xcode/DerivedData/jestDemo-* || true'
+
                 dir('ios') {
                     sh 'pod deintegrate || true'
                     sh 'pod install'
