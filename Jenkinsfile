@@ -68,6 +68,19 @@ pipeline {
             }
         }
 
+        // stage('Android Beta Deployment') {
+        //     when {
+        //         // Ensure this only runs on the main branch
+        //         branch 'main'
+        //     }
+        //     steps {
+        //         echo 'Deploying Android APK to Beta (e.g., Firebase App Distribution)...'
+        //         // NOTE: Add your Firebase appdistribution or fastlane command here.
+        //         // Example:
+        //         // sh "firebase appdistribution:distribute android/app/build/outputs/apk/release/app-release.apk --app YOUR_ANDROID_FIREBASE_APP_ID --groups testers --token \$FIREBASE_TOKEN"
+        //     }
+        // }
+
         stage('iOS Build') {
             // Optional: Only run if we are on a macOS node
             when {
@@ -101,6 +114,20 @@ pipeline {
                 }
             }
         }
+
+        // stage('iOS Beta Deployment') {
+        //     when {
+        //         branch 'main'
+        //         expression { isUnix() && sh(script: 'uname -s', returnStdout: true).trim() == 'Darwin' }
+        //     }
+        //     steps {
+        //         echo 'Deploying iOS App to Beta (e.g., TestFlight or Firebase)...'
+        //         // NOTE: iOS deployment requires a developer certificate and provisioning profile.
+        //         // Once you have your Apple Developer account set up, you can add your deployment script here.
+        //         // Example:
+        //         // sh "fastlane ios beta"
+        //     }
+        // }
     }
 
     post {
